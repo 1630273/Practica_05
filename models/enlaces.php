@@ -37,7 +37,7 @@ class Paginas{
 
 		else{
 
-			$module =  "../views/modules/editar.php";
+			$module =  "views/modules/registro.php";
 
 		}
 		

@@ -11,12 +11,6 @@ class MvcController{
 	
 	}
 
-	
-	public function ingreso(){	
-		
-		include "views/modules/ingresar.php";
-	
-	}
 	#ENLACES
 	#-------------------------------------
 
@@ -38,51 +32,6 @@ class MvcController{
 		include $respuesta;
 
 	}
-
-		#INGRESO DE USUARIOS
-	#------------------------------------
-	public function ingresoUsuarioController(){
-
-		if(isset($_POST["usuarioIngreso"])){
-
-			$datosController = array( 
-				"usuario"=>$_POST["usuarioIngreso"], 
-								      
-				"password"=>$_POST["passwordIngreso"]);
-
-			$respuesta = Datos::ingresoUsuarioModel($datosController, "usuarios");
-
-			if($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $_POST["passwordIngreso"]){
-				
-				
-				session_start();
-
-				$_SESSION["validar"] = true;
-				$_SESSION['user_id'] = $respuesta["no_usu"];
-				$_SESSION['nombre'] = $respuesta["nombre"];
-				$_SESSION['no_perfil'] = $respuesta["no_perfil"];
-
-				if ($respuesta["no_perfil"] == 1) {
-					header("location:views/template.php?action=inicio");
-					ob_end_flush();
-				}else{
-					header("location:views/templateApoyo.php?action=inicio");
-					ob_end_flush();
-				}
-
-			}
-
-			else{
-
-				header("location:index.php?action=fallo");
-				ob_end_flush();
-
-			}
-
-		}	
-
-	}
-
 
 	#REGISTRO DE USUARIOS
 	#------------------------------------
@@ -120,7 +69,39 @@ class MvcController{
 
 	}
 
-	
+	#INGRESO DE USUARIOS
+	#------------------------------------
+	public function ingresoUsuarioController(){
+
+		if(isset($_POST["usuarioIngreso"])){
+
+			$datosController = array( 
+				"user_name"=>$_POST["usuarioIngreso"], 
+								      
+				"user_password_hash"=>$_POST["passwordIngreso"]);
+
+			$respuesta = Datos::ingresoUsuarioModel($datosController, "users");
+
+			if($respuesta["user_name"] == $_POST["usuarioIngreso"] && password_verify($_POST['passwordIngreso'], $respuesta['user_password_hash'])){
+
+				session_start();
+
+				$_SESSION["validar"] = true;
+
+				header("location:index.php?action=usuarios");
+
+			}
+
+			else{
+
+				header("location:index.php?action=fallo");
+
+			}
+
+		}	
+
+	}
+
 	#VISTA DE USUARIOS
 	#------------------------------------
 
