@@ -1,23 +1,64 @@
-<h1>REGISTRO DE USUARIO</h1>
 
-<form method="post">
-	
-	<input type="text" placeholder="Nombre" name="nombreRegistro" required>
+<section class="content-header">
+      <h1>
+        Panel de Administracion
+      
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="template.php?action=usuarios">Usuarios</a></li>
+        <li class="active">Registro</li>
+      </ol>
+    </section>
 
-	<input type="text" placeholder="Apellidos" name="apellidosRegistro" required>
+    <!-- Main content -->
+    <section class="content">
+		<div class="row">
+			<div class="col-md-6  ">
+			<!-- general form elements -->
+			<div class="box box-success  d-flex">
+				<div class="box-header with-border">
+				<h3 class="box-title">Resgistro de Usuarios</h3>
+				</div>
+					<form method="post">    
+						<div class="box-body">
+							<div class="form-group">
+								<label for="nombre">Nombre</label>
+								<input type="text" class="form-control" placeholder="Nombre" id="nombreRegistro" name="nombreRegistro" required>
+							</div>
 
-	<input type="text" placeholder="Usuario" name="usuarioRegistro" required>
+							<div class="form-group">
+								<label for="apellidos">Apelllidos</label>
+								<input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidosRegistro" required>
+							</div>
 
-	<input type="password" placeholder="Contraseña" name="passwordRegistro" required>
+							<div class="form-group">
+								<label for="usuario">Usuario</label>
+								<input type="text" class="form-control"  placeholder="Usuario" id="usuario"name="usuarioRegistro" required>
+							</div>
 
-	<input type="email" placeholder="Email" name="emailRegistro" required>
+							<div class="form-group">
+								<label for="password">Contraseña</label>
+								<input type="password"class="form-control" placeholder="Contraseña" name="passwordRegistro" required>
+							</div>
 
-	<input type="datetime-local" placeholder="Fecha actual" name="fechaRegistro" required>
+							<div class="form-group">
+								<label for="correo">correo</label>
+								<input type="email" class="form-control" placeholder="Correo" name="emailRegistro" required>
+							</div>
 
-	<input type="submit" value="Enviar">
-
-</form>
-
+							<div class="form-group">
+								<label for="nombre">Fecha de Registro</label>
+								<input type="datetime-local"  class="form-control" placeholder="Fecha actual" name="fechaRegistro" required>
+							</div>
+								<button type="submit" value="Enviar"class="btn btn-flat btn-success">Agregar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+</section>	
 <?php
 
 $registro = new MvcController();

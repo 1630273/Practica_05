@@ -1,63 +1,80 @@
-<?php
 
-session_start();
+<section class="content-header">
+      <h1>
+        Panel de Administracion
 
-if(!$_SESSION["validar"]){
+      </h1>
+      <ol class="breadcrumb">
+	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
+             <li class="active">Usuarios</li>
+      </ol>
+	<div class="bread" >
+	  <a href="template.php?action=registro"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Usuario</button></a>
+	  </div>
+	</section>
 
-	header("location:index.php?action=ingresar");
+	
+<!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Usuarios</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+				<table id="example2" class="table table-bordered table-hover">
+					
+					<thead>
+						
+						<tr>
+							<th>Id</th>
+							<th>Nombres</th>
+							<th>Usuario</th>
+							<th>Correo</th>
+							<th>Agregado</th>
+							<th>Modificar</th>
+							<th>Eliminar</th>
 
-	exit();
+						</tr>
 
-}
+					</thead>
 
-?>
+					<tbody>
+						
+						<?php
 
-<h1>USUARIOS</h1>
+						$vistaUsuario = new MvcController();
+						$vistaUsuario -> vistaUsuariosController();
+						$vistaUsuario -> borrarUsuarioController();
 
-	<table border="1">
-		
-		<thead>
-			
-			<tr>
-				<th>Id</th>
-				<th>Nombres</th>
-				<th>Usuario</th>
-				<th>Correo</th>
-				<th>Agregado</th>
-				<th></th>
-				<th></th>
+						?>
 
-			</tr>
+					</tbody>
 
-		</thead>
-
-		<tbody>
-			
+				</table>
+			</div>
+            <!-- /.box-body -->
+		  </div>
+		</div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>		  
 			<?php
 
-			$vistaUsuario = new MvcController();
-			$vistaUsuario -> vistaUsuariosController();
-			$vistaUsuario -> borrarUsuarioController();
+			if(isset($_GET["action"])){
+
+				if($_GET["action"] == "cambio"){
+
+					echo "Cambio Exitoso";
+				
+				}
+
+			}
 
 			?>
-
-		</tbody>
-
-	</table>
-
-<?php
-
-if(isset($_GET["action"])){
-
-	if($_GET["action"] == "cambio"){
-
-		echo "Cambio Exitoso";
-	
-	}
-
-}
-
-?>
 
 
 

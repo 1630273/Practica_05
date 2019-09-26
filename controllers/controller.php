@@ -7,7 +7,7 @@ class MvcController{
 
 	public function pagina(){	
 		
-		include "views/template.php";
+		include "views/modules/ingresar.php";
 	
 	}
 
@@ -24,7 +24,7 @@ class MvcController{
 
 		else{
 
-			$enlaces = "index";
+			$enlaces = "template";
 		}
 
 		$respuesta = Paginas::enlacesPaginasModel($enlaces);
@@ -56,7 +56,7 @@ class MvcController{
 
 			if($respuesta == "success"){
 
-				header("location:index.php?action=ok");
+				header("location:template.php?action=ok");
 
 			}
 
@@ -88,13 +88,13 @@ class MvcController{
 
 				$_SESSION["validar"] = true;
 
-				header("location:index.php?action=usuarios");
+				header("location:views/template.php?action=inicio");
 
 			}
 
 			else{
 
-				header("location:index.php?action=fallo");
+				header("location:views/template.php?action=fallo");
 
 			}
 
@@ -118,8 +118,8 @@ class MvcController{
 				<td>'.$item["user_name"].'</td>
 				<td>'.$item["user_email"].'</td>
 				<td>'.$item["date_added"].'</td>
-				<td><a href="index.php?action=editar&user_id='.$item["user_id"].'"><button>Editar</button></a></td>
-				<td><a href="index.php?action=usuarios&idBorrar='.$item["user_id"].'"><button>Borrar</button></a></td>
+				<td><a href="template.php?action=editar&user_id='.$item["user_id"].'"class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
+				<td><a href="template.php?action=usuarios&idBorrar='.$item["user_id"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
 			</tr>';
 
 		}
