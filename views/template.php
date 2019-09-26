@@ -155,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </li>
 
         <li>
-          <a href="template.php?action=usuarios">
+          <a href="template.php?action=inventario">
             <i class="fa fa-dollar"></i> <span>Inventario</span>
            
           </a>

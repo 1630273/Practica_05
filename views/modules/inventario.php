@@ -6,10 +6,10 @@
       </h1>
       <ol class="breadcrumb">
 	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-             <li class="active">Categorias</li>
+             <li class="active">Inventario</li>
       </ol>
 	<div class="bread" >
-	  <a href="template.php?action=registro_categoria"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Categoria</button></a>
+	  <a href="template.php?action=registro_producto"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
 	  </div>
 	</section>
 
@@ -20,7 +20,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Categorias</h3>
+              <h3 class="box-title">Productos</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -29,9 +29,11 @@
 					<thead>
 						
 						<tr>
-							<th>Nombre</th>
-							<th>Descripion</th>
-							<th>Agregado</th>
+							<th>Codigo del Producto</th>
+							<th>Nombre del Producto</th>
+							<th>Fecha</th>
+							<th>Precio</th>
+							<th>Stock</th>
 							<th>Modificar</th>
 							<th>Eliminar</th>
 
@@ -44,8 +46,8 @@
 						<?php
 
 						$vistaUsuario = new MvcController();
-						$vistaUsuario -> vistaCategoriasController();
-						$vistaUsuario -> borrarCategoriaController();
+						$vistaUsuario -> vistaProductosController();
+						$vistaUsuario -> borrarProductoController();
 
 						?>
 
@@ -64,7 +66,7 @@
 
 			if(isset($_GET["action"])){
 
-				if($_GET["action"] == "cambio"){
+				if($_GET["action"] == "cambioProducto"){
 
 					echo "Cambio Exitoso";
 				
