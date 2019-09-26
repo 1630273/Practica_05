@@ -6,8 +6,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="template.php?action=usuarios">Usuarios</a></li>
-        <li class="active">Editar Usuario</li>
+        <li><a href="template.php?action=categorias">Categorias</a></li>
+        <li class="active">Editar de Categoria</li>
       </ol>
     </section>
 
@@ -18,23 +18,23 @@
 			<!-- general form elements -->
 			<div class="box box-success  d-flex">
 				<div class="box-header with-border">
-				<h3 class="box-title">Editar Usuario</h3>
-			</div>
-
-			<form method="post">
+				<h3 class="box-title">Editar de Categoria</h3>
+				</div>
 				
-				<?php
+				<form method="post">
+					
+					<?php
 
-				$editarUsuario = new MvcController();
-				$editarUsuario -> editarUsuarioController();
-				$editarUsuario -> actualizarUsuarioController();
+					$editarUsuario = new MvcController();
+					$editarUsuario -> editarCategoriaController();
+					$editarUsuario -> actualizarCategoriaController();
 
-				?>
+					?>
 
-			</form>
+				</form>
 
+
+				</div>
 			</div>
 		</div>
-	</div>
-</section>	
-
+</section>

@@ -163,33 +163,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <li>
           <a href="template.php?action=usuarios">
-            <i class="fa fa-user"></i> <span>Inventario</span>
+            <i class="fa fa-dollar"></i> <span>Inventario</span>
            
           </a>
         </li>
 
         <li>
-          <a href="template.php?action=usuarios">
-            <i class="fa fa-user"></i> <span>Categorias</span>
+          <a href="template.php?action=categorias">
+          <i class="fa fa-fw fa-th-large"></i> <span>Categorias</span>
            
           </a>
         </li>
     
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          
-        </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
