@@ -38,7 +38,7 @@ class Datos extends Conexion{
 	#-------------------------------------
 	public function ingresoUsuarioModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT user_name, user_password_hash FROM $tabla WHERE user_name = :user_name");	
+		$stmt = Conexion::conectar()->prepare("SELECT firstname, lastname, user_name, user_password_hash FROM $tabla WHERE user_name = :user_name");	
 		$stmt->bindParam(":user_name", $datosModel["user_name"], PDO::PARAM_STR);
 		$stmt->execute();
 		return $stmt->fetch();
@@ -241,6 +241,162 @@ class Datos extends Conexion{
 		$stmt->close();
 
 	}
+
+
+
+
+
+
+
+
+
+#------------------------------------------------
+
+
+
+
+
+	public function ObtenerCategorias($tabla){
+		$stmt = Conexion::conectar()->prepare("SELECT id_categoria, nombre_categoria, descripcion_categoria, date_added FROM $tabla");	
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+
+
+
+	public function registroProductoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (codigo_producto, nombre_producto, date_added, precio_producto, stock, id_categoria) VALUES (:codigo_producto,:nombre_producto, :date_added, :precio_producto, :stock, :id_categoria)");	
+		
+		$stmt->bindParam(":codigo_producto", $datosModel["codigo_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
+		
+		$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
+		$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_categoria", $datosModel["id_categoria"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
+
+
+
+
+
+#---------------------------------------------------
+
+
+	# Vista Productos
+
+
+	public function vistaProductosModel($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");	
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+#------------------------------------------------------
+
+
+	#EDITAR PRODUCTO
+	#-------------------------------------
+
+	public function editarProductoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_producto, codigo_producto, nombre_producto, precio_producto, stock FROM $tabla WHERE id_producto = :id_producto");
+
+		$stmt->bindParam(":id_producto", $datosModel, PDO::PARAM_INT);	
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
+
+	#ACTUALIZAR USUARIO
+	#-------------------------------------
+
+	public function actualizarProductoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_producto = :id_producto, codigo_producto = :codigo_producto, nombre_producto = :nombre_producto, precio_producto = :precio_producto, stock = :stock WHERE id_producto = :id_producto");
+
+		$stmt->bindParam(":codigo_producto", $datosModel["codigo_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
+
+
+	#BORRAR CATEGORIAS
+	#------------------------------------
+	public function borrarProductoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_producto = :idBorrar");
+		$stmt->bindParam(":idBorrar", $datosModel, PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
+
+
 }
 
 ?>
