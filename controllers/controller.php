@@ -100,6 +100,8 @@ class MvcController{
 				session_start();
 
 				$_SESSION["validar"] = true;
+				$_SESSION['nombre'] = $respuesta["firstname"] . " " . $respuesta["lastname"];
+
 
 				header("location:views/template.php?action=inicio");
 
