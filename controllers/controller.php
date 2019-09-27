@@ -32,7 +32,20 @@ class MvcController{
 		include $respuesta;
 
 	}
+	public function borrarCategoriaController(){
 
+			
+			$respuesta = Datos::borrarCategoriaModel($datosController, "categorias");
+
+			if($respuesta == "success"){
+
+				header("location:template.php?action=categorias");
+			
+			}
+
+		}
+
+	
 	#REGISTRO DE USUARIOS
 	#------------------------------------
 	public function registroUsuarioController(){

@@ -2,7 +2,25 @@
 
 require_once "conexion.php";
 
+
+
+
 class Datos extends Conexion{
+
+
+	public function ContCategoriasModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT count(*) FROM $tabla ");
+
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
+
 
 	#REGISTRO DE USUARIOS
 	#-------------------------------------
