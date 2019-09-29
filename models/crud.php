@@ -8,14 +8,14 @@ require_once "conexion.php";
 class Datos extends Conexion{
 
 
-	public function ContCategoriasModel($datosModel, $tabla){
+	public function ContRowsModel( $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT count(*) FROM $tabla ");
 
 
 		$stmt->execute();
 
-		return $stmt->fetch();
+		return $stmt->fetch(PDO::FETCH_NUM);
 
 		$stmt->close();
 
@@ -26,7 +26,7 @@ class Datos extends Conexion{
 	#-------------------------------------
 	public function registroUsuarioModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password_hash, user_email, date_added) VALUES (:firstname,:lastname,:user_name,:user_password_hash,:user_email,:date_added)");	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password_hash, user_email) VALUES (:firstname,:lastname,:user_name,:user_password_hash,:user_email)");	
 		
 		$stmt->bindParam(":firstname", $datosModel["firstname"], PDO::PARAM_STR);
 		$stmt->bindParam(":lastname", $datosModel["lastname"], PDO::PARAM_STR);
@@ -34,7 +34,7 @@ class Datos extends Conexion{
 		$password = password_hash($datosModel['user_password_hash'], PASSWORD_BCRYPT);
 		$stmt->bindParam(":user_password_hash", $password, PDO::PARAM_STR);
 		$stmt->bindParam(":user_email", $datosModel["user_email"], PDO::PARAM_STR);
-		$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
+		
 
 		if($stmt->execute()){
 
@@ -153,12 +153,12 @@ class Datos extends Conexion{
 	#-------------------------------------
 	public function registroCategoriaModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre_categoria, descripcion_categoria, date_added) VALUES (:nombre,:descripcion,:date_added)");	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre_categoria, descripcion_categoria) VALUES (:nombre,:descripcion)");	
 		
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
 		
-		$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
+	
 
 		if($stmt->execute()){
 
@@ -275,7 +275,7 @@ class Datos extends Conexion{
 
 
 	public function ObtenerCategorias($tabla){
-		$stmt = Conexion::conectar()->prepare("SELECT id_categoria, nombre_categoria, descripcion_categoria, date_added FROM $tabla");	
+		$stmt = Conexion::conectar()->prepare("SELECT id_categoria, nombre_categoria, descripcion_categoria FROM $tabla");	
 
 		$stmt->execute();
 
@@ -359,7 +359,7 @@ class Datos extends Conexion{
 
 	}
 
-	#ACTUALIZAR USUARIO
+	#ACTUALIZAR PRODUCTO
 	#-------------------------------------
 
 	public function actualizarProductoModel($datosModel, $tabla){

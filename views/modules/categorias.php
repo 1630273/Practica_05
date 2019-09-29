@@ -29,9 +29,9 @@
 					<thead>
 						
 						<tr>
+							<th>Id</th>
 							<th>Nombre</th>
 							<th>Descripion</th>
-							<th>Agregado</th>
 							<th>Modificar</th>
 							<th>Eliminar</th>
 

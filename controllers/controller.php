@@ -4,7 +4,7 @@ class MvcController{
 
 	#LLAMADA A LA PLANTILLA
 	#-------------------------------------
-
+	
 	public function pagina(){	
 		
 		include "views/modules/ingresar.php";
@@ -32,19 +32,6 @@ class MvcController{
 		include $respuesta;
 
 	}
-	public function borrarCategoriaController(){
-
-			
-			$respuesta = Datos::borrarCategoriaModel($datosController, "categorias");
-
-			if($respuesta == "success"){
-
-				header("location:template.php?action=categorias");
-			
-			}
-
-		}
-
 	
 	#REGISTRO DE USUARIOS
 	#------------------------------------
@@ -61,9 +48,7 @@ class MvcController{
 								      
 				"user_password_hash"=>$_POST["passwordRegistro"],
 								      
-				"user_email"=>$_POST["emailRegistro"],
-
-				"date_added"=>$_POST["fechaRegistro"]);
+				"user_email"=>$_POST["emailRegistro"]);
 
 			$respuesta = Datos::registroUsuarioModel($datosController, "users");
 
@@ -237,15 +222,13 @@ class MvcController{
 	#REGISTRO DE CATEGORIAS
 	#------------------------------------
 	public function registroCategoriaController(){
-
+		
 		if(isset($_POST["nombreRegistro"])){
 
 			$datosController = array(
 				"nombre"=>$_POST["nombreRegistro"], 
 
-				"descripcion"=>$_POST["desRegistro"], 
-
-				"date_added"=>$_POST["fechaRegistro"]);
+				"descripcion"=>$_POST["desRegistro"]);
 
 			$respuesta = Datos::registroCategoriaModel($datosController, "categorias");
 
@@ -279,7 +262,6 @@ class MvcController{
 				<td>'.$item["id_categoria"].'</td>
 				<td>'.$item["nombre_categoria"].'</td>
 				<td>'.$item["descripcion_categoria"].'</td>
-				<td>'.$item["date_added"].'</td>
 				<td><a href="template.php?action=editar_categoria&id_categoria='.$item["id_categoria"].'"class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
 				<td><a href="template.php?action=categorias&idBorrar='.$item["id_categoria"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
 			</tr>';
@@ -380,7 +362,8 @@ class MvcController{
 #Registro de producto
 
 	public function registroProductoController(){
-
+		date_default_timezone_set("America/Mexico_City");
+		$fecha_actual = date("Y-m-d H:i:s");
 		if(isset($_POST["codigoRegistro"])){
 
 			$datosController = array(
@@ -388,7 +371,7 @@ class MvcController{
 
 				"nombre_producto"=>$_POST["nombreProductoRegistro"], 
 
-				"date_added"=>$_POST["fechaRegistro"],
+				"date_added"=>$fecha_actual,
 
 				"id_categoria"=>$_POST["categoriaRegistro"],
 
@@ -431,7 +414,7 @@ class MvcController{
 				<td>'.$item["codigo_producto"].'</td>
 				<td>'.$item["nombre_producto"].'</td>
 				<td>'.$item["date_added"].'</td>
-				<td>'.$item["precio_producto"].'</td>
+				<td>'.'$ '.$item["precio_producto"].'</td>
 				<td>'.$item["stock"].'</td>
 				<td><a href="template.php?action=editar_producto&id_producto='.$item["id_producto"].'"class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
 				<td><a href="template.php?action=inventario&idBorrar='.$item["id_producto"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
@@ -520,7 +503,7 @@ class MvcController{
 	}
 
 
-	#BORRAR CATEGORIA
+	#BORRAR Producto
 	#------------------------------------
 	public function borrarProductoController(){
 

@@ -47,10 +47,6 @@
 								<input type="email" class="form-control" placeholder="Correo" name="emailRegistro" required>
 							</div>
 
-							<div class="form-group">
-								<label for="nombre">Fecha de Registro</label>
-								<input type="datetime-local"  class="form-control" placeholder="Fecha actual" name="fechaRegistro" required>
-							</div>
 								<button type="submit" value="Enviar"class="btn btn-flat btn-success">Agregar</button>
 							</div>
 						</div>

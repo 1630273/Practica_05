@@ -33,11 +33,7 @@
 								<input type="text" class="form-control" placeholder="Nombre del producto" id="nombreProductoRegistro" name="nombreProductoRegistro" required>
 							</div>
 
-							<div class="form-group">
-								<label for="fechaRegistro">Fecha de Registro</label>
-								<input type="datetime-local"  class="form-control" placeholder="Fecha actual" name="fechaRegistro" id="fechaRegistro" required>
-							</div>
-
+						
 							
 							<div class="form-group">
 				   				<label>Selecciona Categoria</label>

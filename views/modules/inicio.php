@@ -22,9 +22,12 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?php  $Productos=Datos::ContRowsModel("products"); 
+              
+              echo implode($Productos);
+              ?></h3>
 
-              <p>New Orders</p>
+              <p>Productos</p>
             </div>
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
@@ -41,7 +44,7 @@
             <div class="inner">
               <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Bounce Rate</p>
+              <p>Ventas Realizadas</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -56,9 +59,12 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php  $UsusariosCount=Datos::ContRowsModel("users"); 
+              
+              echo implode($UsusariosCount);
+              ?></h3>
 
-              <p>User Registrations</p>
+              <p>Ususarios Resgistrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -73,9 +79,13 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?php  $Productos=Datos::ContRowsModel("products"); 
+              
+              echo implode($Productos);
+              ?>
+              </h3>
 
-              <p>Unique Visitors</p>
+              <p>Categorias</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -89,3 +99,13 @@
       </div>
 
 </section>     
+
+<section>
+<?php
+date_default_timezone_set("America/Mexico_City");
+  $fecha_actual = date("Y-m-d H:i:s");
+
+  echo $fecha_actual;
+  
+  ?>
+</section>
