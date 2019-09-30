@@ -85,6 +85,8 @@ class MvcController{
 				session_start();
 
 				$_SESSION["validar"] = true;
+				$_SESSION['user_id'] = $respuesta["user_id"];
+				$_SESSION['user_name'] = $respuesta["user_name"];
 				$_SESSION['nombre'] = $respuesta["firstname"] . " " . $respuesta["lastname"];
 
 
@@ -482,7 +484,11 @@ class MvcController{
 
 				"precio_producto"=>$_POST["precioEditar"],
 
-				"stock"=>$_POST["stockEditar"]);
+				"stock"=>$_POST["stockEditar"],
+
+				"user_id"=>$_SESSION['user_id'],
+
+				"user_name"=>$_SESSION['user_name']);
 			
 			$respuesta = Datos::actualizarProductoModel($datosController, "products");
 
@@ -521,6 +527,28 @@ class MvcController{
 
 		}
 
+	}
+
+
+
+	#------------------------------------------------
+
+	#VISTA HISTORIAL
+	public function vistaHistorialController(){
+
+		$datosController = $_GET["id_producto"];
+		$respuesta = Datos::vistaHistorialModel($datosController, "historial");
+
+
+		foreach($respuesta as $row => $item){
+		echo'<tr>
+				<td>'.$item["fecha"].'</td>
+				<td>'.$item["nota"].'</td>
+				<td>'.$item["referencia"].'</td>
+				<td>'.$item["cantidad"].'</td>
+			</tr>';
+
+		}
 	}
 
 

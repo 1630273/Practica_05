@@ -33,6 +33,32 @@
 
 				</form>
 
+				<table id="example1" class="table table-bordered table-hover">
+					
+					<thead>
+						
+						<tr>
+							<th>Fecha</th>
+							<th>Descripcion</th>
+							<th>Referencia</th>
+							<th>Total</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+						
+						<?php
+
+						$editarProducto -> vistaHistorialController();
+
+						?>
+
+					</tbody>
+
+				</table>
+
 
 				</div>
 			</div>

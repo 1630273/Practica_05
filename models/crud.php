@@ -8,6 +8,9 @@ require_once "conexion.php";
 class Datos extends Conexion{
 
 
+#-------------------------------------------------------
+	#CONTAR FILAS DE LAS TABLAS
+
 	public function ContRowsModel( $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT count(*) FROM $tabla ");
@@ -20,6 +23,9 @@ class Datos extends Conexion{
 		$stmt->close();
 
 	}
+
+
+
 
 
 	#REGISTRO DE USUARIOS
@@ -56,7 +62,7 @@ class Datos extends Conexion{
 	#-------------------------------------
 	public function ingresoUsuarioModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT firstname, lastname, user_name, user_password_hash FROM $tabla WHERE user_name = :user_name");	
+		$stmt = Conexion::conectar()->prepare("SELECT user_id, firstname, lastname, user_name, user_password_hash FROM $tabla WHERE user_name = :user_name");	
 		$stmt->bindParam(":user_name", $datosModel["user_name"], PDO::PARAM_STR);
 		$stmt->execute();
 		return $stmt->fetch();
@@ -390,7 +396,7 @@ class Datos extends Conexion{
 
 
 
-	#BORRAR CATEGORIAS
+	#BORRAR PRODUCTO
 	#------------------------------------
 	public function borrarProductoModel($datosModel, $tabla){
 
@@ -412,6 +418,58 @@ class Datos extends Conexion{
 		$stmt->close();
 
 	}
+
+
+
+
+#----------------------------------------------------
+
+	#VISTA HISTORIAL
+
+	public function vistaHistorialModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_producto = :id_producto");	
+
+		$stmt->bindParam (":id_producto", $datosModel, PDO::PARAM_INT);
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+
+
+	// #INSERTAR HISTORIAL
+	// public function insertarHistorialModel($datosModel, $tabla){
+
+	// 	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_producto, user_id, fecha, nota, referencia, cantidad) VALUES (:id_producto, :user_id, getdate(), :nota, :referencia, :cantidad)");	
+		
+	// 	$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
+	// 	$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
+		
+	// 	$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
+	// 	$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
+	// 	$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
+	// 	$stmt->bindParam(":id_categoria", $datosModel["id_categoria"], PDO::PARAM_STR);
+
+	// 	if($stmt->execute()){
+
+	// 		return "success";
+
+	// 	}
+
+	// 	else{
+
+	// 		return "error";
+
+	// 	}
+
+	// 	$stmt->close();
+
+	// }
 
 
 

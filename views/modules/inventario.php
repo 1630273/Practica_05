@@ -47,6 +47,7 @@
 							?>
 						</select>
 					</div>
+					
 					<div class='col-md-12 text-center'>
 						<span id="loader"></span>
 					</div>
