@@ -88,6 +88,7 @@ class MvcController{
 				$_SESSION['user_id'] = $respuesta["user_id"];
 				$_SESSION['user_name'] = $respuesta["user_name"];
 				$_SESSION['nombre'] = $respuesta["firstname"] . " " . $respuesta["lastname"];
+				$_SESSION['nombre1'] = $respuesta["firstname"];
 
 
 				header("location:views/template.php?action=inicio");
@@ -546,9 +547,30 @@ class MvcController{
 		}
 	}
 
+
+	public function vistaHistorialAllController(){
+
+		$respuesta = Datos::vistaHistorialAllModel("historial");
+
+		foreach($respuesta as $row => $item){
+		echo'<tr>
+				<td>'.$item["fecha"].'</td>
+				<td>'.$item["nota"].'</td>
+				<td>'.$item["referencia"].'</td>
+				<td>'.$item["cantidad"].'</td>
+			</tr>';
+
+		}
+	}
+
+
+
+	#-------------------------------------------------
+
 	#AGREGAR STOCK
 	public function obtenerStockController(){
-
+		date_default_timezone_set("America/Mexico_City");
+		$fecha_actual = date("Y-m-d H:i:s");
 		$datosController = $_GET["id_producto"];
 		$obtener = Datos::valorStockModel($datosController, "products");
 
@@ -568,19 +590,32 @@ class MvcController{
 
 					if($_POST["Radio"]=="+"){
 						$stock=$actual+$nuevo;
+						$nota=$_SESSION['nombre1'] . " " .
+						"agrego " . $nuevo . " producto(S) al inventario.";
 					}else {
 						$stock=$actual-$nuevo;
+						$nota=$_SESSION['nombre1'] . " " .
+						"elimino " . $nuevo . " producto(S) al inventario.";
 					}
 					
 
 					$datosController2 = array(
 						"id_producto"=>$datosController,
-						"cantidad"=>$stock,);
+						"cantidad"=>$stock);
 		
+					$datosController3 = array(
+						"id_producto"=>$datosController,
+						"user_id"=>$_SESSION['user_id'],
+						"fecha"=>$fecha_actual,
+						"nota"=>$nota,
+						"referencia"=>$_POST["referencia"],
+						"cantidad"=>$nuevo
+						);
 
 						
-					$respuesta = Datos:: editarStockModel($datosController2, "products");	
-					if($respuesta == "success"){
+					$respuesta = Datos:: editarStockModel($datosController2, "products");
+					$respuesta2 = Datos::insertarHistorialModel($datosController3, "historial");	
+					if($respuesta == "success" && $respuesta2 == "success"){
 		
 						header("location:template.php?action=productos");
 		

@@ -49,7 +49,7 @@
 
 							<div class="form-group">
 								<label for="referencia">Referencias</label>
-								<input type="text" class="form-control" placeholder="Referencia" id="referencia" name="refrencia" required>
+								<input type="text" class="form-control" placeholder="Referencia" id="referencia" name="referencia" required>
 							</div>
 
 							
@@ -61,6 +61,35 @@
 
                         
 					</form>
+
+
+					<table id="example1" class="table table-bordered table-hover">
+					
+					<thead>
+						
+						<tr>
+							<th>Fecha</th>
+							<th>Descripcion</th>
+							<th>Referencia</th>
+							<th>Total</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+						
+						<?php
+
+						$registro -> vistaHistorialController();
+
+						?>
+
+					</tbody>
+
+				</table>
+
+
 				</div>
 			</div>
 		</div>

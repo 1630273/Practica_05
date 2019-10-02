@@ -452,36 +452,48 @@ class Datos extends Conexion{
 	}
 
 
+	public function vistaHistorialAllModel($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");	
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
 
 
-	// #INSERTAR HISTORIAL
-	// public function insertarHistorialModel($datosModel, $tabla){
 
-	// 	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_producto, user_id, fecha, nota, referencia, cantidad) VALUES (:id_producto, :user_id, getdate(), :nota, :referencia, :cantidad)");	
+	#INSERTAR HISTORIAL
+	public function insertarHistorialModel($datosModel, $tabla){
+
+	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_producto, user_id, fecha, nota, referencia, cantidad) VALUES (:id_producto, :user_id, :fecha, :nota, :referencia, :cantidad)");	
 		
-	// 	$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
-	// 	$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
+	$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
+	$stmt->bindParam(":user_id", $datosModel["user_id"], PDO::PARAM_INT);
 		
-	// 	$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
-	// 	$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
-	// 	$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
-	// 	$stmt->bindParam(":id_categoria", $datosModel["id_categoria"], PDO::PARAM_STR);
+	$stmt->bindParam(":fecha", $datosModel["fecha"], PDO::PARAM_STR);
+	$stmt->bindParam(":nota", $datosModel["nota"], PDO::PARAM_STR);
+	$stmt->bindParam(":referencia", $datosModel["referencia"], PDO::PARAM_STR);
+	$stmt->bindParam(":cantidad", $datosModel["cantidad"], PDO::PARAM_INT);
 
-	// 	if($stmt->execute()){
+	if($stmt->execute()){
 
-	// 		return "success";
+		return "success";
 
-	// 	}
+	}
 
-	// 	else{
+	else{
 
-	// 		return "error";
+		return "error";
 
-	// 	}
+	}
 
-	// 	$stmt->close();
+	$stmt->close();
 
-	// }
+	}
 
 
 
