@@ -155,8 +155,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </li>
 
         <li>
-          <a href="template.php?action=inventario">
-            <i class="fa fa-dollar"></i> <span>Inventario</span>
+          <a href="template.php?action=productos">
+            <i class="fa fa-fw fa-shopping-cart"></i> <span>Productos</span>
            
           </a>
         </li>
@@ -164,6 +164,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li>
           <a href="template.php?action=categorias">
           <i class="fa fa-fw fa-th-large"></i> <span>Categorias</span>
+           
+          </a>
+        </li>
+
+        <li>
+          <a href="template.php?action=ventas">
+            <i class="fa fa-dollar"></i> <span>Ventas</span>
            
           </a>
         </li>

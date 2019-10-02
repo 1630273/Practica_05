@@ -6,7 +6,7 @@
       </h1>
       <ol class="breadcrumb">
 	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-             <li class="active">Inventario</li>
+             <li class="active">Productos</li>
       </ol>
 	<div class="bread" >
 	  <a href="template.php?action=registro_producto"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
@@ -62,6 +62,7 @@
 							<th>Fecha</th>
 							<th>Precio</th>
 							<th>Stock</th>
+							<th>Inventario</th>
 							<th>Modificar</th>
 							<th>Eliminar</th>
 

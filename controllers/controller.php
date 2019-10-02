@@ -418,8 +418,9 @@ class MvcController{
 				<td>'.$item["date_added"].'</td>
 				<td>'.'$ '.$item["precio_producto"].'</td>
 				<td>'.$item["stock"].'</td>
+				<td><a href="template.php?action=stock&id_producto='.$item["id_producto"].'"class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a></td>
 				<td><a href="template.php?action=editar_producto&id_producto='.$item["id_producto"].'"class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
-				<td><a href="template.php?action=inventario&idBorrar='.$item["id_producto"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+				<td><a href="template.php?action=productos&idBorrar='.$item["id_producto"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
 			</tr>';
 
 		}
@@ -458,10 +459,6 @@ class MvcController{
 						<input type="number" class="form-control"  value="'.$respuesta["precio_producto"].'" name="precioEditar" required>
 					</div>
 
-					<div class="form-group">
-						<label for="stockEditar">Stock</label>
-						<input type="number" class="form-control"  value="'.$respuesta["stock"].'" name="stockEditar" required>
-					</div>
 
 					<button type="submit"  value="Actualizar" class="btn btn-flat btn-success">Actualizar</button>
 					</div>
@@ -483,8 +480,6 @@ class MvcController{
 				"nombre_producto"=>$_POST["nombreProductoEditar"],
 
 				"precio_producto"=>$_POST["precioEditar"],
-
-				"stock"=>$_POST["stockEditar"],
 
 				"user_id"=>$_SESSION['user_id'],
 
@@ -551,8 +546,58 @@ class MvcController{
 		}
 	}
 
+	#AGREGAR STOCK
+	public function obtenerStockController(){
 
+		$datosController = $_GET["id_producto"];
+		$obtener = Datos::valorStockModel($datosController, "products");
 
+		$actual=$obtener["stock"];
+
+		 echo'
+				<div class="form-group">
+					<label for="stockEditar">Valor actual</label>
+					<input type="number" disabled class="form-control"  value="'.$actual.'" name="actual" required>
+				</div>';
+		
+
+				
+				
+				if(isset($_POST["cantidad"])){
+					$nuevo=intval($_POST["cantidad"]);
+					
+					if($_POST["Radio"]=="+"){
+						$stock=$actual+$nuevo;
+					}else {
+						$stock=$actual-$nuevo;
+					}
+					
+
+					$datosController2 = array(
+						"id_producto"=>$datosController,
+						"cantidad"=>$stock,);
+		
+
+						
+					$respuesta = Datos:: editarStockModel($datosController2, "products");	
+					if($respuesta == "success"){
+		
+						header("location:template.php?action=productos");
+		
+					}
+		
+					else{
+		
+						header("location:index.php");
+					}
+		
+				}
+		
+			
+			
+	}
 }
+
+
 
 ?>

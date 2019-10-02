@@ -25,22 +25,35 @@ class Datos extends Conexion{
 	}
 
 
+#-------------------------------------------------------
+	#REGRESAR VALOR DEL STOCK
+
+	public function valorStockModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT stock FROM $tabla WHERE id_producto = :id_producto");
+		
+		$stmt->bindParam(":id_producto", $datosModel, PDO::PARAM_INT);
+
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
 
 
 
 	#REGISTRO DE USUARIOS
 	#-------------------------------------
-	public function registroUsuarioModel($datosModel, $tabla){
+	public function editarStockModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password_hash, user_email) VALUES (:firstname,:lastname,:user_name,:user_password_hash,:user_email)");	
-		
-		$stmt->bindParam(":firstname", $datosModel["firstname"], PDO::PARAM_STR);
-		$stmt->bindParam(":lastname", $datosModel["lastname"], PDO::PARAM_STR);
-		$stmt->bindParam(":user_name", $datosModel["user_name"], PDO::PARAM_STR);
-		$password = password_hash($datosModel['user_password_hash'], PASSWORD_BCRYPT);
-		$stmt->bindParam(":user_password_hash", $password, PDO::PARAM_STR);
-		$stmt->bindParam(":user_email", $datosModel["user_email"], PDO::PARAM_STR);
-		
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  stock = :cantidad WHERE id_producto = :id_producto");	
+				
+		$stmt->bindParam(":cantidad", $datosModel["cantidad"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
+
 
 		if($stmt->execute()){
 
@@ -370,12 +383,11 @@ class Datos extends Conexion{
 
 	public function actualizarProductoModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_producto = :id_producto, codigo_producto = :codigo_producto, nombre_producto = :nombre_producto, precio_producto = :precio_producto, stock = :stock WHERE id_producto = :id_producto");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_producto = :id_producto, codigo_producto = :codigo_producto, nombre_producto = :nombre_producto, precio_producto = :precio_producto WHERE id_producto = :id_producto");
 
 		$stmt->bindParam(":codigo_producto", $datosModel["codigo_producto"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
-		$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
