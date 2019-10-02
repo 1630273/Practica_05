@@ -96,7 +96,7 @@ class MvcController{
 
 			else{
 
-				header("location:views/template.php?action=fallo");
+				header("location:index.php?action=fallo");
 
 			}
 
@@ -565,7 +565,7 @@ class MvcController{
 				
 				if(isset($_POST["cantidad"])){
 					$nuevo=intval($_POST["cantidad"]);
-					
+
 					if($_POST["Radio"]=="+"){
 						$stock=$actual+$nuevo;
 					}else {

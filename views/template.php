@@ -150,20 +150,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li>
           <a href="template.php?action=usuarios">
             <i class="fa fa-user"></i> <span>Usuarios</span>
-           
           </a>
         </li>
 
         <li>
           <a href="template.php?action=productos">
-            <i class="fa fa-fw fa-shopping-cart"></i> <span>Productos</span>
+            <i class="fa fa-shopping-cart"></i> <span>Productos</span>
            
           </a>
         </li>
 
         <li>
           <a href="template.php?action=categorias">
-          <i class="fa fa-fw fa-th-large"></i> <span>Categorias</span>
+          <i class="fa  fa-th-large"></i> <span>Categorias</span>
            
           </a>
         </li>

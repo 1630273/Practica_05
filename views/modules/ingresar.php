@@ -62,30 +62,37 @@
         </div>
         <!-- /.col -->
       </div>
-	  <?php
 
-		$ingreso = new MvcController();
-		$ingreso -> ingresoUsuarioController();
-
-		if(isset($_GET["action"])){
-
-			if($_GET["action"] == "fallo"){
-
-				echo "Fallo al ingresar";
-			
-			}
-
-		}
-
-?>
     </form>
-
-
-
- 
+	
 
   </div>
+
+
+  <?php
+
+$ingreso = new MvcController();
+$ingreso -> ingresoUsuarioController();
+
+if(isset($_GET["action"])){
+
+  if($_GET["action"] == "fallo"){
+
+    echo '
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+              Usuario o Contraseña incorrectos.
+            </div>
+          ';
+  
+  }
+
+}
+
+?>
   <!-- /.login-box-body -->
+ 
 </div>
 <!-- /.login-box -->
 
