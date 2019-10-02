@@ -54,7 +54,7 @@
 
 							<div class="form-group">
 								<label for="precioRegistro">Precio</label>
-								<input type="number" class="form-control"  placeholder="Precio" id="precioRegistro"name="precioRegistro" required>
+								<input type="number" class="form-control" min="1"  placeholder="Precio" id="precioRegistro"name="precioRegistro" required>
 							</div>
 
 							<div class="form-group">

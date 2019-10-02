@@ -306,6 +306,19 @@ class Datos extends Conexion{
 
 
 
+	public function ObtenerProductos($tabla){
+		$stmt = Conexion::conectar()->prepare("SELECT id_producto, nombre_producto FROM $tabla");	
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
+
+
+
 
 
 	public function registroProductoModel($datosModel, $tabla){

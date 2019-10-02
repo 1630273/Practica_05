@@ -6,52 +6,58 @@
       </h1>
       <ol class="breadcrumb">
 	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-             <li class="active">Productos</li>
+             <li class="active">Ventas</li>
       </ol>
-	<div class="bread" >
-	  <a href="template.php?action=registro_producto"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
-	  </div>
 	</section>
 
 	
 <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Productos</h3>
-			</div>
-			
-
-		
-            <!-- /.box-header -->
-            <div class="box-body">
-			<div class="row">
-					<div class='col-md-4'>
-						<label>Filtrar por código o nombre</label>
-						<input type="text" class="form-control" id="q" placeholder="Código o nombre del producto" onkeyup='load(1);'>
-					</div>
-					
-					<div class='col-md-4'>
-						<label>Filtrar por categoría</label>
-						<select class='form-control' name='id_categoria' id='id_categoria' onchange="load(1);">
-							<option value="">Selecciona una categoría</option>
-							<?php 
-							$query_categoria=mysqli_query($con,"select * from categorias order by nombre_categoria");
-							while($rw=mysqli_fetch_array($query_categoria))	{
-								?>
-							<option value="<?php echo $rw['id_categoria'];?>"><?php echo $rw['nombre_categoria'];?></option>			
-								<?php
-							}
-							?>
-						</select>
-					</div>
-					
-					<div class='col-md-12 text-center'>
-						<span id="loader"></span>
-					</div>
+	<div class="row">
+			<div class="col-md-6  ">
+			<!-- general form elements -->
+			<div class="box box-success  d-flex">
+				<div class="box-header with-border">
+				<h3 class="box-title">Ventas</h3>
 				</div>
+					<form method="post">    
+						<div class="box-body">
+						<div class="form-group">
+				   				<label>Selecciona Categoria</label>
+				   				<div>  
+				   					<select name="producto" class="form-control">
+										<?php 
+						 					$categorias = Datos::ObtenerProductos("products");
+						 
+						 						foreach ($categorias as $a): ?>
+								 					<option value="<?php echo $a['id_productos']?>"><?php echo $a['nombre_producto'] ?></option>
+										<?php endforeach; ?>
+					
+					 				</select>												
+						
+				   				</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="precioRegistro">Cantidad</label>
+								<input type="number" class="form-control" min="1" placeholder="Cantidad" id="precioRegistro"name="cantidad" required>
+							</div>
+
+							
+								<button type="submit" value="Enviar"class="btn btn-flat btn-success">Agregar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		
+      
+     
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">Resumen de Ventas</h3>
+			</div>
 				<table id="example1" class="table table-bordered table-hover">
 					
 					<thead>
@@ -88,7 +94,7 @@
 		  </div>
 		</div>
         <!-- /.col -->
-      </div>
+  
       <!-- /.row -->
     </section>		  
 			<?php
