@@ -101,11 +101,32 @@
 </section>     
 
 <section>
-<?php
-date_default_timezone_set("America/Mexico_City");
-  $fecha_actual = date("Y-m-d H:i:s");
 
-  echo $fecha_actual;
-  
-  ?>
+<table id="example1" class="table table-bordered table-hover">
+          
+          <thead>
+            
+            <tr>
+              <th>Fecha</th>
+              <th>Descripcion</th>
+              <th>Referencia</th>
+              <th>Total</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+            
+            <?php
+
+            $vistaHistorialAll = new MvcController();
+            $vistaHistorialAll -> vistaHistorialAllController();
+
+            ?>
+
+          </tbody>
+
+        </table>
+
 </section>
