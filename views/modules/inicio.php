@@ -1,8 +1,5 @@
 
 
-<?php
-
-?>
      <section class="content-header">
       <h1>
         Panel de Administracion
@@ -32,7 +29,7 @@
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="template.php?action=productos" class="small-box-footer">
               More info <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -49,7 +46,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="template.php?action=ventas" class="small-box-footer">
               More info <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -69,7 +66,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="template.php?action=usuarios" class="small-box-footer">
               More info <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -90,7 +87,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="template.php?action=categorias" class="small-box-footer">
               More info <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -102,31 +99,5 @@
 
 <section>
 
-<table id="example1" class="table table-bordered table-hover">
-          
-          <thead>
-            
-            <tr>
-              <th>Fecha</th>
-              <th>Descripcion</th>
-              <th>Referencia</th>
-              <th>Total</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-            
-            <?php
-
-            $vistaHistorialAll = new MvcController();
-            $vistaHistorialAll -> vistaHistorialAllController();
-
-            ?>
-
-          </tbody>
-
-        </table>
 
 </section>
