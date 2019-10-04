@@ -13,24 +13,34 @@
 	
 <!-- Main content -->
     <section class="content">
-	<div class="row">
+		<div class="row">
 			<div class="col-md-6  ">
 			<!-- general form elements -->
-			<div class="box box-success  d-flex">
-				<div class="box-header with-border">
-				<h3 class="box-title">Ventas</h3>
-				</div>
+				<div class="box box-success  d-flex">
+					<div class="box-header with-border">
+						<h3 class="box-title">Ventas</h3>
+					</div>
 					<form method="post">    
 						<div class="box-body">
 						<div class="form-group">
+
+						<?php
+
+						$carrito= new MvcController();
+						$carrito -> carritoController();
+
+						?>
+
 				   				<label>Selecciona Categoria</label>
 				   				<div>  
 				   					<select name="producto" class="form-control">
 										<?php 
+
+
 						 					$categorias = Datos::ObtenerProductos("products");
 						 
 						 						foreach ($categorias as $a): ?>
-								 					<option value="<?php echo $a['id_productos']?>"><?php echo $a['nombre_producto'] ?></option>
+								 					<option value="<?php echo $a['id_producto']?>"><?php echo $a['nombre_producto'] ?></option>
 										<?php endforeach; ?>
 					
 					 				</select>												
@@ -41,7 +51,7 @@
 
 							<div class="form-group">
 								<label for="precioRegistro">Cantidad</label>
-								<input type="number" class="form-control" min="1" placeholder="Cantidad" id="precioRegistro"name="cantidad" required>
+								<input type="number" class="form-control" min="1" placeholder="Cantidad" name="cantidad" required>
 							</div>
 
 							
@@ -49,27 +59,25 @@
 							</div>
 						</div>
 					</form>
-				</div>
-			</div>
-		
-      
-     
+					</div>
+			
+			
+			<div class="col-md-6  ">
           <div class="box box-success">
             <div class="box-header">
-              <h3 class="box-title">Resumen de Ventas</h3>
+              <h3 class="box-title">Detalle de compra</h3>
 			</div>
+			<div>
 				<table id="example1" class="table table-bordered table-hover">
 					
 					<thead>
 						
 						<tr>
-							<th>Codigo del Producto</th>
+						
 							<th>Nombre del Producto</th>
-							<th>Fecha</th>
 							<th>Precio</th>
-							<th>Stock</th>
-							<th>Inventario</th>
-							<th>Modificar</th>
+							<th>Cantidad</th>
+							<th>Importe</th>
 							<th>Eliminar</th>
 
 						</tr>
@@ -80,36 +88,15 @@
 						
 						<?php
 
-						$vistaUsuario = new MvcController();
-						$vistaUsuario -> vistaProductosController();
-						$vistaUsuario -> borrarProductoController();
-
+						$vistaVentas = new MvcController();
+						$vistaVentas -> vistaCarritoController();
+						$vistaVentas -> borrarProductoCarritoController();
 						?>
-
-					</tbody>
-
-				</table>
-			</div>
-            <!-- /.box-body -->
-		  </div>
-		</div>
         <!-- /.col -->
-  
+		</div>
       <!-- /.row -->
     </section>		  
-			<?php
-
-			if(isset($_GET["action"])){
-
-				if($_GET["action"] == "cambioProducto"){
-
-					echo "Cambio Exitoso";
-				
-				}
-
-			}
-
-			?>
+		
 
 
 

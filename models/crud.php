@@ -44,6 +44,43 @@ class Datos extends Conexion{
 	}
 
 
+	#-------------------------------------------------------
+	#REGRESAR PRECIO PORDUCTO
+
+	public function precioModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT precio_producto FROM $tabla WHERE id_producto = :id_producto");
+		
+		$stmt->bindParam(":id_producto", $datosModel, PDO::PARAM_INT);
+
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
+
+
+	
+	#-------------------------------------------------------
+	#REGRESAR CANTIDAD PORDUCTO
+
+	public function cantidadModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT cantidad FROM $tabla WHERE id_producto = :id_producto");
+		
+		$stmt->bindParam(":id_producto", $datosModel, PDO::PARAM_INT);
+
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+	}
 
 	#REGISTRO DE USUARIOS
 	#-------------------------------------
@@ -176,8 +213,6 @@ class Datos extends Conexion{
 		
 		$stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datosModel["descripcion"], PDO::PARAM_STR);
-		
-	
 
 		if($stmt->execute()){
 
@@ -307,7 +342,7 @@ class Datos extends Conexion{
 
 
 	public function ObtenerProductos($tabla){
-		$stmt = Conexion::conectar()->prepare("SELECT id_producto, nombre_producto FROM $tabla");	
+		$stmt = Conexion::conectar()->prepare("SELECT id_producto, nombre_producto,precio_producto FROM $tabla");	
 
 		$stmt->execute();
 
@@ -327,7 +362,6 @@ class Datos extends Conexion{
 		
 		$stmt->bindParam(":codigo_producto", $datosModel["codigo_producto"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre_producto", $datosModel["nombre_producto"], PDO::PARAM_STR);
-		
 		$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_producto", $datosModel["precio_producto"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_STR);
@@ -406,13 +440,10 @@ class Datos extends Conexion{
 		if($stmt->execute()){
 
 			return "success";
-
 		}
 
 		else{
-
 			return "error";
-
 		}
 
 		$stmt->close();
@@ -508,8 +539,93 @@ class Datos extends Conexion{
 
 	}
 
+	public function ExitenciaIDModel( $tabla, $datosModel){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_producto FROM $tabla  WHERE id_producto = :id_producto");
+		
+		$stmt->bindParam(":id_producto", $datosModel, PDO::PARAM_INT);
+
+	
+		if ($stmt-> rowCount() == 0){
+			return "error";
+			
+
+		}
+
+		else{
+
+			
+			return "success";
+		}
+
+		$stmt->close();
+
+	}
+
+	public function agregarCarritoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (cantidad, importe, id_producto) VALUES (:cantidad,:importe,:id_producto )");	
+		
+		
+		$stmt->bindParam(":id_producto", $datosModel["id_producto"], PDO::PARAM_INT);
+		$stmt->bindParam(":cantidad", $datosModel["cantidad"], PDO::PARAM_INT);
+		$stmt->bindParam(":importe", $datosModel["importe"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+	public function actualizarCarritoModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  cantidad = :cantidad WHERE id_producto = :id_producto");
+
+	
+		$stmt->bindParam(":id_categoria", $datosModel["id_categoria"], PDO::PARAM_INT);
+
+		$stmt->bindParam(":cantidad", $datosModel["cantidad"], PDO::PARAM_INT);
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
 
 
+	#VISTA HISTORIAL
+
+	public function vistaCarritoModel($tabla, $tabla1){
+
+		$stmt = Conexion::conectar()->prepare("SELECT  A.id_producto,A.nombre_producto, A.precio_producto, B.cantidad,B.importe  FROM $tabla A INNER JOIN $tabla1 AS B ON A.id_producto=B.id_producto
+		");	
+
+	
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+	}
 }
 
 ?>

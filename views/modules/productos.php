@@ -8,14 +8,12 @@
 	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
              <li class="active">Productos</li>
       </ol>
-	<div class="bread" >
-	  <a href="template.php?action=registro_producto"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
-	  </div>
+
 	</section>
 
 	
 <!-- Main content -->
-    <section class="content">
+<section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
@@ -23,47 +21,48 @@
               <h3 class="box-title">Productos</h3>
 			</div>
 			
-
-		
             <!-- /.box-header -->
             <div class="box-body">
-			<div class="row">
-
-				<table id="example2" class="table table-bordered table-hover">
-					
-					<thead>
+				
+					<table id="example2" class="table table-bordered table-hover">
 						
-						<tr>
-							<th>Codigo del Producto</th>
-							<th>Nombre del Producto</th>
-							<th>Fecha</th>
-							<th>Precio</th>
-							<th>Stock</th>
-							<th>Inventario</th>
-							<th>Modificar</th>
-							<th>Eliminar</th>
+						<thead>
+							
+							<tr>
+								<th>Codigo del Producto</th>
+								<th>Nombre del Producto</th>
+								<th>Fecha</th>
+								<th>Precio</th>
+								<th>Stock</th>
+								<th>Inventario</th>
+								<th>Modificar</th>
+								<th>Eliminar</th>
 
-						</tr>
+							</tr>
 
-					</thead>
+						</thead>
 
-					<tbody>
-						
-						<?php
+						<tbody>
+							
+							<?php
 
-						$vistaUsuario = new MvcController();
-						$vistaUsuario -> vistaProductosController();
-						$vistaUsuario -> borrarProductoController();
+							$vistaUsuario = new MvcController();
+							$vistaUsuario -> vistaProductosController();
+							$vistaUsuario -> borrarProductoController();
 
-						?>
+							?>
 
-					</tbody>
+						</tbody>
 
-				</table>
-			</div>
+					</table>
+				
             <!-- /.box-body -->
 		  </div>
+	
 		</div>
+		<div class="bread" >
+	  <a href="template.php?action=registro_producto"><button class="btn  btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
+	  </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->

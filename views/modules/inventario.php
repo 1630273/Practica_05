@@ -8,9 +8,7 @@
 	  <li><a href="template.php?action=inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
              <li class="active">Inventario</li>
       </ol>
-	<div class="bread" >
-	  <a href="template.php?action=registro_producto"><button class="btn btn-lg btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
-	  </div>
+	
 	</section>
 
 	
@@ -86,6 +84,9 @@
             <!-- /.box-body -->
 		  </div>
 		</div>
+		<div class="bread" >
+	  <a href="template.php?action=registro_producto"><button class="btn  btn-success "><i class="fa fa-user"></i>  Agregar Producto</button></a>
+	  </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->

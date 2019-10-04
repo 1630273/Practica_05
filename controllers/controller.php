@@ -386,7 +386,7 @@ class MvcController{
 
 			if($respuesta == "success"){
 
-				header("location:template.php?action=inventario");
+				header("location:template.php?action=productos");
 
 			}
 
@@ -581,9 +581,6 @@ class MvcController{
 					<label for="stockEditar">Valor actual</label>
 					<input type="number" disabled class="form-control"  value="'.$actual.'" name="actual" required>
 				</div>';
-		
-
-				
 				
 				if(isset($_POST["cantidad"])){
 					$nuevo=intval($_POST["cantidad"]);
@@ -611,7 +608,6 @@ class MvcController{
 						"referencia"=>$_POST["referencia"],
 						"cantidad"=>$nuevo
 						);
-
 						
 					$respuesta = Datos:: editarStockModel($datosController2, "products");
 					$respuesta2 = Datos::insertarHistorialModel($datosController3, "historial");	
@@ -627,10 +623,148 @@ class MvcController{
 					}
 		
 				}
-		
-			
-			
 	}
+
+
+	
+	#AGREGAR STOCK
+	public function carritoController(){
+		
+				if(isset($_POST["cantidad"])){
+
+					$datosController = $_POST["producto"];
+					$obtener = Datos::precioModel($datosController, "products");
+			
+					$precio=$obtener["precio_producto"];
+					$cantidad=intval($_POST["cantidad"]);
+					$importe=$precio*$cantidad;
+
+					$datosController2 = array(
+						"id_producto"=>$datosController,
+						"cantidad"=>$cantidad,
+						"importe"=>$importe);
+
+						//$obtener2 = Datos::ExitenciaIDModel($datosController, "temporal");
+						
+							
+							$obtener3 = Datos::cantidadModel($datosController, "temporal");
+							$cantidadtemporal=$obtener3["cantidad"];
+
+
+							$nuevacantidad= $cantidadtemporal+$cantidad;
+
+							$actulizar = Datos::actualizarCarritoModel($nuevacantidad, "temporal");
+				
+							if($actulizar == "success" ){
+				
+								header("location:template.php?action=ventas");
+				
+							}
+				
+							else{
+				
+								header("location:index.php");
+							}
+				
+			
+						
+			
+							$respuesta = Datos::agregarCarritoModel($datosController2, "temporal");
+						
+							if($respuesta == "success" ){
+				
+								header("location:template.php?action=ventas");
+				
+							}
+				
+							else{
+				
+								header("location:index.php");
+							}
+				
+						
+			
+						
+				
+				}
+	}
+
+
+	public function vistaCarritoController(){
+
+		$respuesta = Datos::vistaCarritoModel("products","temporal");
+		$total=0;
+		foreach($respuesta as $row => $item){
+		
+		echo'<tr>
+				<td>'.$item["nombre_producto"].'</td>
+				<td>'.$item["precio_producto"].'</td>
+				<td>'.$item["cantidad"].'</td>
+				<td>'.$item["importe"].'</td>
+				<td><a href="template.php?action=ventas&idBorrar='.$item["id_producto"].'"class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+			</tr>';
+			$total=$total+$item["importe"];
+		}	
+		
+		echo'</tbody>
+
+			</table>
+		</div>
+		
+		
+		
+		<!-- /.box-body -->
+		</div>
+		<div class="box box-success  d-flex">
+		<div class="box-header with-border">
+						<h3 class="box-title">Total a pagar</h3>
+					</div>
+		<form method="post">    
+			<div class="box-body">
+				<div class="input-group">
+					
+					<span class="input-group-addon">$</span>
+					<input type="number" disabled class="form-control"  value="'.$total.'" name="Total" required>	
+				</div>
+				
+				<div class="form-group">
+				
+				<button type="submit"  value="Enviar"class="btn btn-flat btn-success">Terminar Compra</button>
+			
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+	
+	</div>
+';
+
+
+
+		
+	}
+
+	#BORRAR Producto
+	#------------------------------------
+	public function borrarProductoCarritoController(){
+
+		if(isset($_GET["idBorrar"])){
+
+			$datosController = $_GET["idBorrar"];
+			
+			$respuesta = Datos::borrarProductoModel($datosController, "temporal");
+
+			if($respuesta == "success"){
+
+				header("location:template.php?action=ventas");
+			
+			}
+
+		}
+
+	}
+
 }
 
 
