@@ -317,6 +317,21 @@ class Datos extends Conexion{
 
 
 
+	#CONTAR SI HAY PRODUCTOS
+
+	public function contarCategoriaProductosModel($datosModel, $tabla, $tabla1){
+
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT(*) FROM $tabla INNER JOIN $tabla1 ON $tabla.id_categoria = $tabla1.id_categoria WHERE $tabla.id_categoria = :idBorrar");
+
+		$stmt->bindParam(":idBorrar", $datosModel, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+	}
+
 
 
 

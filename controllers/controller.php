@@ -338,15 +338,30 @@ class MvcController{
 		if(isset($_GET["idBorrar"])){
 
 			$datosController = $_GET["idBorrar"];
-			
-			$respuesta = Datos::borrarCategoriaModel($datosController, "categorias");
 
-			if($respuesta == "success"){
+			$contar = Datos::contarCategoriaProductosModel($datosController, "categorias", "products");
 
-				header("location:template.php?action=categorias");
+			if ($contar["COUNT(*)"] == 0) {
+				$respuesta = Datos::borrarCategoriaModel($datosController, "categorias");
+
+				if($respuesta == "success"){
+
+					header("location:template.php?action=categorias");
 			
+				}
+
+			}else if ($contar > 0) {
+				
+				echo '
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+              Categoria asociada con 1 o mas productos!.
+            </div>
+          ';
 			}
-
+			
+			
 		}
 
 	}
@@ -644,7 +659,7 @@ class MvcController{
 						"cantidad"=>$cantidad,
 						"importe"=>$importe);
 
-						//$obtener2 = Datos::ExitenciaIDModel($datosController, "temporal");
+						//$obtener2 = Datos::ExitenciaIDModel("temporal", $datosController);
 						
 							
 							$obtener3 = Datos::cantidadModel($datosController, "temporal");
