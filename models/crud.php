@@ -121,6 +121,36 @@ class Datos extends Conexion{
 
 	}
 
+
+	#REGISTRO USUARIO
+	#-----------------------------------------
+	public function registroUsuarioModel($datosModel, $tabla){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password_hash, user_email, date_added) VALUES (:firstname,:lastname, :user_name, :user_password_hash, :user_email, :date_added)");	
+		
+		$stmt->bindParam(":firstname", $datosModel["firstname"], PDO::PARAM_STR);
+		$stmt->bindParam(":lastname", $datosModel["lastname"], PDO::PARAM_STR);
+		$stmt->bindParam(":user_name", $datosModel["user_name"], PDO::PARAM_STR);
+		$stmt->bindParam(":user_password_hash", $datosModel["user_password_hash"], PDO::PARAM_STR);
+		$stmt->bindParam(":user_email", $datosModel["user_email"], PDO::PARAM_STR);
+		$stmt->bindParam(":date_added", $datosModel["date_added"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "success";
+
+		}
+
+		else{
+
+			return "error";
+
+		}
+
+		$stmt->close();
+
+	}
+
 	#VISTA USUARIOS
 	#-------------------------------------
 
@@ -316,6 +346,21 @@ class Datos extends Conexion{
 
 
 
+
+	#CONTAR SI HAY PRODUCTOS
+
+	public function contarCategoriaProductosModel($datosModel, $tabla, $tabla1){
+
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT(*) FROM $tabla INNER JOIN $tabla1 ON $tabla.id_categoria = $tabla1.id_categoria WHERE $tabla.id_categoria = :idBorrar");
+
+		$stmt->bindParam(":idBorrar", $datosModel, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+	}
 
 
 
